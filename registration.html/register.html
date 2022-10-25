@@ -39,11 +39,23 @@
         const name=event.target.username.value;
         const email=event.target.email.value;
         const date=event.target.date.value;
-        localstorage.setitem('name',name);
-        localstorage.setitem('email',name);
-        localstorage.setitem('date',name);
+        localstorage.setItem('name',name);
+        localstorage.setItem('email',email);
+        localstorage.setItem('date',date);
+        const obj={
+           name,email,date
+        }
+        localstorage.setItem('obj.email',JSON.stringigy(obj))
+        ShowNewUserOnScreen(user){
+            const parentNode=document.getElementById('listofusers');
+            const childHTML=<li> ${user.name}-${user.email}<li>
+                parentNode.innerHTML=parentNode.innerHTML+childHTML;
+        }
+
+
 
       }
+      
   </script>
 
     <label>name</label>
