@@ -51,6 +51,21 @@
             const childHTML=<li> ${user.name}-${user.email}<li>
                 parentNode.innerHTML=parentNode.innerHTML+childHTML;
         }
+        function deleteUser(emailId){
+                console.log(emailId)
+                localStorage.removeItem(emailId);
+                removeUserFromScreen(emailId);
+
+            }
+
+            function removeUserFromScreen(emailId){
+                const parentNode = document.getElementById('listOfUsers');
+                const childNodeToBeDeleted = document.getElementById(emailId);
+
+                parentNode.removeChild(childNodeToBeDeleted)
+            }
+
+
 
 
 
