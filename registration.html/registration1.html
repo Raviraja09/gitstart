@@ -33,7 +33,7 @@
       <input type="email" name="email" required /><br />
 
       <label>password</label>
-      <input type="password" name="password" required /><br />
+      <input type="password" name="head" required /><br />
 
       <label>Time for call</label>
       <input type="date" name="date" required /><br />
@@ -52,9 +52,7 @@
         localStorage.setItem("date", date);
 
         const obj = {
-          name,
-          email,
-          date,
+          name,email,date,
         };
 
         localStorage.setItem("obj.email", JSON.stringify(obj));
@@ -66,7 +64,8 @@
           parentNode.innerHTML = parentNode.innerHTML + childHTML;
         }
 
-        function deleteUser(emailId) {
+        function deleteUser(emailId)
+        {
           console.log(emailId);
           localStorage.removeItem(emailId);
           removeUserFromScreen(emailId);
