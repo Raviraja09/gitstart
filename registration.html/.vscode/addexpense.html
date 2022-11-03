@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      body {
+        background-color: white;
+        text-align: center;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+
+    <form action="#" onsubmit="savetolocalstorage(event)">
+      <label>expenseamount</label>
+      <input type="expenseamount" name="expenseamount" required /><br />
+
+      <label>description</label>
+      <input type="description" name="description" required /><br />
+
+      <label>category</label>
+      <input type="category" name="category" required /><br />
+
+      <button type="submit">add expense</button>
+    </form>
+    <ul>id='listofexpenses'</ul>
+    <script>
+      function savetolocalstorage(event) {
+        event.preventDefault();
+        const expenseamount = event.target.expenseamount.value;
+        const description = event.target.description.value;
+        const category = event.target.category.value;
+          const obj = {
+          expenseamount,description,category,
+        };
+
+        localStorage.setItem("obj.expenseamount", JSON.stringify(obj));
+        ShowNewUserOnScreen(obj);
+
+
+        function ShowNewUserOnScreen(user)
+         {
+          console.log(`new expense`);
+          const parentNode = document.getElementById("listofexpenses");
+          const childHTML = `<li> ${expenseamount.expenseamount}-${description.description}<li>`;
+          parentNode.innerHTML=childHTML;
+        }
+      }
+    </script>
+  </body>
+</html>
