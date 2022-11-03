@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       form {
-        background-color: white;
+        background-color: red;
         text-align: center;
         margin: 10px;
       }
 
       body {
-        background-color: white;
+        background-color: red;
         text-align: center;
       }
     </style>
@@ -27,7 +27,7 @@
 
     <form action="#" onsubmit="savetolocalstorage(event)">
       <label>name</label>
-      <input type="text" name="username" required /><br />
+      <input type="username" name="username" required /><br />
 
       <label>email</label>
       <input type="email" name="email" required /><br />
@@ -82,3 +82,17 @@
     </script>
   </body>
 </html>
+function deleteUser(expenseamount)
+        {
+          console.log(expenseamount);
+          localStorage.removeItem(expenseamount);
+          removeUserFromScreen(expenseamount);
+        }
+
+        function removeUserFromScreen(expenseamount) {
+          const parentNode = document.getElementById("listOfUsers");
+          const childNodeToBeDeleted = document.getElementById(expenseamount);
+          parentNode.removeChild(childNodeToBeDeleted);
+        }
+
+        console.log(`inside save to local storage`);
