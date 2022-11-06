@@ -1,30 +1,49 @@
-const post=[
+function buycar()
 {
-    title:'post one',body:'this is post one'},
-    {title:'post two',body:'this is post two'
+    return newpromise((res,rej)=>
+        {
+            setTimeout(()=>
+            {
+                rej('buy a car')
+            },1000)
+        })
 }
-];
-function createpost(post)
+function plantrip()
 {
-    return new Promise((resolve,reject) =>
+    return newpromise((res,rej)=>
+        {
+            setTimeout(()=>
+            {
+                res('plantrip')
+            },3000)
+        })
+}
+function reachmanali()
+{
+    return newpromise((res,rej)=>
+        {
+            setTimeout(()=>
+            {
+                res('reachmanali')
+            },2000)
+        })
+}
+async function fun1()
     {
-    setTimeout(() =>{
-        posts.push(post);
-        const error=true;
-    if(!error)
-    {
-        resolve();
-}
-})
-else{
-    reject('error:something went wrong');
-}
-    },2000);
-    const promise1=promise.resolve("hello world");
-    const promise2=10;
-    const promise3=new promise((resolve,reject)=>
-        setTimeout(resolve,2000,'goodbye')
-    );
-    promise.all([promise1,promise2,promise3,]).then((values =>)=>console.log(values)));
-}
+        try{
+      const msg=await buycar();
+      console.log(msg);
+      const msg1=await plantrip();
+      console.log(msg1);
+      const msg2=await reachmanali();
+      console.log(msg2);
+        }
+      catch(error)
+      {
+        console.log(error)
+      }
+
+    }
+    fun1()
+
 

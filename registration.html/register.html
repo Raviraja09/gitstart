@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       form {
-        background-color: white;
+        background-color: red;
         text-align: center;
         margin: 10px;
       }
 
       body {
-        background-color: white;
+        background-color: red;
         text-align: center;
       }
     </style>
@@ -27,32 +27,45 @@
 
     <form action="#" onsubmit="savetolocalstorage(event)">
       <label>name</label>
-      <input type="text" name="expenseamount" required /><br />
+      <input type="username" name="username" required /><br />
 
       <label>email</label>
-      <input type="choose description" name="choose description" required /><br />
+      <input type="email" name="email" required /><br />
 
       <label>password</label>
-      <input type="choose a category" name="choose a categoty" required /><br />
+      <input type="password" name="head" required /><br />
 
-      <button type="Add expense"></button>
+      <label>Time for call</label>
+      <input type="date" name="date" required /><br />
+
+      <button type="submit">Get a call</button>
     </form>
     <script>
       function savetolocalstorage(event) {
         event.preventDefault();
 
-        const name = event.target.expenseamount.value;
-        const email = event.target.choose a description.value;
-        const date = event.target.choose a category.value;
+        const name = event.target.username.value;
+        const email = event.target.email.value;
+        const date = event.target.date.value;
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
         localStorage.setItem("date", date);
 
         const obj = {
-          name,
-          email,
-          date,
+          name,email,date,
         };
+        axios.post("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/details",obj)
+        .then((response) =>{
+          ShowNewUserOnScreen(response.data)
+        
+        })
+        .catch((error) =>
+        {
+          document.body.innerHTML=document.body.innerHTML
+          console.log(error);
+        })
+        
+
 
         localStorage.setItem("obj.email", JSON.stringify(obj));
 
@@ -63,7 +76,8 @@
           parentNode.innerHTML = parentNode.innerHTML + childHTML;
         }
 
-        function deleteUser(emailId) {
+        function deleteUser(emailId)
+        {
           console.log(emailId);
           localStorage.removeItem(emailId);
           removeUserFromScreen(emailId);
