@@ -102,9 +102,19 @@
           console.log(`show new users on screen called`);
           const parentNode = document.getElementById("listofusers");
           const childHTML = `<li> ${user._id}-${user.email}
-            <button onclick=deleteuser('${user._id}')<li>`
+            <button onclick=deleteuser('${user._id}')Delete user<\button>
+            <button onclick=edituser('${user._id}',${use.email}'')edit user<\button>
+                <li>`
           parentNode.innerHTML = parentNode.innerHTML + childHTML;
         }
+        function editUserdetails(emailId,name,userId)
+        {
+          
+          document.getElementById('email').value=email;
+          document.getElementById('username').value=username;
+          document.getElementById('date').value=date;
+          deleteuser(userId)
+
 
         function deleteUser(emailId)
         {
