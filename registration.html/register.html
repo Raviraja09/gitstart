@@ -91,22 +91,40 @@
         localStorage.setItem("obj.email", JSON.stringify(obj));
 
         function ShowNewUserOnScreen(user) {
+          document.getElementById('email').value=' ';
+          document.getElementById('username').value=' ';
+          document.getElementById('phonenumber').value=' ';
+          if (localstorage.getItem(user.email)!=null)
+          {
+            removeUserFromScreen(user.email)
+          }
+          
           console.log(`show new users on screen called`);
           const parentNode = document.getElementById("listofusers");
-          const childHTML = `<li> ${user.name}-${user.email}<li>`;
+          const childHTML = `<li> ${user._id}-${user.email}
+            <button onclick=deleteuser('${user._id}')<li>`
           parentNode.innerHTML = parentNode.innerHTML + childHTML;
         }
 
         function deleteUser(emailId)
         {
+          axios.delete('https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/details/${userid}')
+          .then((response)=>
+          {
+            removeUserFromScreen(userId)
+          })
+          .catch((error)=>
+          {
+            console.log(error)
+          })
           console.log(emailId);
           localStorage.removeItem(emailId);
           removeUserFromScreen(emailId);
         }
 
-        function removeUserFromScreen(emailId) {
+        function removeUserFromScreen(userId) {
           const parentNode = document.getElementById("listOfUsers");
-          const childNodeToBeDeleted = document.getElementById(emailId);
+          const childNodeToBeDeleted = document.getElementById(userId);
           parentNode.removeChild(childNodeToBeDeleted);
         }
 
