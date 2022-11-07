@@ -64,6 +64,27 @@
           document.body.innerHTML=document.body.innerHTML
           console.log(error);
         })
+        window.addEventListener("DOMcontentoverloaded",()=>
+        {
+          axios.get("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/details")
+          .then((response)=>{
+            for(var i=0;i<response.data;i++){
+              ShowNewUserOnScreen(response.data[i])
+            }
+          })
+          .then((error)=>{
+            console.log("error");
+          })
+          const localstorageobj=localstorage;
+          const localstoragekeys=object.keys(localstorageobj)
+          for(var i=0;i<localstorage.length;i++)
+          {
+            const key=localstoragekeys[i]
+            const userDetailstring=localstorageobj[key];
+            const userDetailObj=JSON.parse(userDetailstring);
+            ShowNewUserOnScreen(userDetailsObj)
+          }
+        })
         
 
 
