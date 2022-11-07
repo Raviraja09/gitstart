@@ -82,17 +82,3 @@
     </script>
   </body>
 </html>
-function deleteUser(expenseamount)
-        {
-          console.log(expenseamount);
-          localStorage.removeItem(expenseamount);
-          removeUserFromScreen(expenseamount);
-        }
-
-        function removeUserFromScreen(expenseamount) {
-          const parentNode = document.getElementById("listOfUsers");
-          const childNodeToBeDeleted = document.getElementById(expenseamount);
-          parentNode.removeChild(childNodeToBeDeleted);
-        }
-
-        console.log(`inside save to local storage`);
