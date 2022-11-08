@@ -32,6 +32,30 @@
           const obj = {
           expenseamount,description,category,
         };
+        axios.post("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
+        .then((response) =>{
+          ShowNewUserOnScreen(response.data)
+        })
+        .catch((error) =>{
+          console.log(error);
+        })
+        window.addEventListener("DOMcontentoverloaded",()=>
+        {
+          axios.get("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
+          .then((response)=>{
+            for(var i=0;i<responsedata;i++)
+            {
+              ShowNewUserOnScreen(response.data[i])
+            }
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+
+        })
+        
+
+        
 
         localStorage.setItem("obj.expenseamount", JSON.stringify(obj));
         ShowNewUserOnScreen(obj);
@@ -41,10 +65,49 @@
          {
           console.log(`new expense`);
           const parentNode = document.getElementById("listofexpenses");
-          const childHTML = `<li> ${expenseamount.expenseamount}-${description.description}<li>`;
+          const childHTML = `<li> ${expenseamount.expenseamount}-${description.description}
+            <button onclick=deleteuser('${expenseamount._id}')Delete user<\button>
+            <button onclick=edituser('${expenseamount._id}',${description.description}'')edit user<\button><li>`;
           parentNode.innerHTML=childHTML;
         }
       }
+      function editUserdetails(expenseamount,description,category)
+  {
+    
+    document.getElementById('expenseamount').value=expenseamount;
+    document.getElementById('description').value=description;
+    document.getElementById('category').value=category;
+    deleteuser(expenseamount)
+
+
+  function deleteUser(expenseamount)
+  {
+    axios.delete('https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense/${expenseamount}')
+    .then((response)=>
+    {
+      removeUserFromScreen(expenseamount)
+    })
+    .catch((error)=>
+    {
+      console.log(error)
+    })
+    console.log(expenseamount);
+    localStorage.removeItem(expenseamount);
+    removeUserFromScreen(expenseamount);
+  }
+
+  function removeUserFromScreen(expenseamount) {
+    const parentNode = document.getElementById("listOfUsers");
+    const childNodeToBeDeleted = document.getElementById(expenseamount);
+    parentNode.removeChild(childNodeToBeDeleted);
+  }
+
+  
+}
+</script>
+</body>
+</html>
+
     </script>
   </body>
 </html>
