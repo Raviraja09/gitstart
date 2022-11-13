@@ -12,27 +12,34 @@
 
     <form action="#" onsubmit="savetolocalstorage(event)">
       <label>expenseamount</label>
-      <input type="expenseamount" name="expenseamount" required /><br />
+      <input type="expenseamount" name="expenseamount" id="expenseamount" required /><br />
 
       <label>description</label>
-      <input type="description" name="description" required /><br />
+      <input type="description" name="description" id="description" required /><br />
 
       <label>category</label>
       <input type="category" name="category" required /><br />
 
       <button type="submit">add expense</button>
     </form>
-    <ul>id='listofexpenses'</ul>
+    <ul id='listofexpenses'></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+
+
+
+
     <script>
       function savetolocalstorage(event) {
+        console.log("button click");
         event.preventDefault();
         const expenseamount = event.target.expenseamount.value;
         const description = event.target.description.value;
         const category = event.target.category.value;
           const obj = {
           expenseamount,description,category,
+          
         };
-        axios.post("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
+        let response=axios.post("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
         .then((response) =>{
           ShowNewUserOnScreen(response.data)
         })
@@ -41,7 +48,8 @@
         })
         window.addEventListener("DOMcontentoverloaded",()=>
         {
-          axios.get("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
+          
+          let response=axios.get("https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense",obj)
           .then((response)=>{
             for(var i=0;i<responsedata;i++)
             {
@@ -61,20 +69,22 @@
         ShowNewUserOnScreen(obj);
 
 
-        function ShowNewUserOnScreen(user)
+        function ShowNewUserOnScreen(newexpense)
          {
           console.log(`new expense`);
           const parentNode = document.getElementById("listofexpenses");
-          const childHTML = `<li> ${expenseamount.expenseamount}-${description.description}
-            <button onclick=deleteuser('${expenseamount._id}')Delete user<\button>
-            <button onclick=edituser('${expenseamount._id}',${description.description}'')edit user<\button><li>`;
+          let expenseamount=document.getElementById('expenseamount').value;
+          const childHTML = `<li id=${expenseamount.expenseamount}${description.description}>
+            ${expenseamount} ${description.description}
+            <button onclick=deleteexpense(${expenseamount._id})>Delete expense</button>
+            <button onclick=editexpense(${expenseamount._id}${description.description})>edit expense</button></li>`;
           parentNode.innerHTML=childHTML;
         }
       }
       function editUserdetails(expenseamount,description,category)
   {
     
-    document.getElementById('expenseamount').value=expenseamount;
+    expenseamount=document.getElementById('expenseamount').value;
     document.getElementById('description').value=description;
     document.getElementById('category').value=category;
     deleteuser(expenseamount)
@@ -82,7 +92,7 @@
 
   function deleteUser(expenseamount)
   {
-    axios.delete('https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense/${expenseamount}')
+    let response=axios.delete('https://crudcrud.com/api/f02d57e871fd42fa9200bc90c9378765/expense/${expenseamount}')
     .then((response)=>
     {
       removeUserFromScreen(expenseamount)
@@ -97,7 +107,7 @@
   }
 
   function removeUserFromScreen(expenseamount) {
-    const parentNode = document.getElementById("listOfUsers");
+    const parentNode = document.getElementById("listOfexpenses");
     const childNodeToBeDeleted = document.getElementById(expenseamount);
     parentNode.removeChild(childNodeToBeDeleted);
   }
@@ -106,8 +116,4 @@
 }
 </script>
 </body>
-</html>
-
-    </script>
-  </body>
 </html>

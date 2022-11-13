@@ -50,6 +50,7 @@
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
         localStorage.setItem("date", date);
+      }
 
         const obj = {
           name,email,date,
@@ -103,7 +104,7 @@
           const parentNode = document.getElementById("listofusers");
           const childHTML = `<li> ${user._id}-${user.email}
             <button onclick=deleteuser('${user._id}')Delete user<\button>
-            <button onclick=edituser('${user._id}',${use.email}'')edit user<\button>
+            <button onclick=edituser('${user._id}',${user.email}'')edit user<\button>
                 <li>`
           parentNode.innerHTML = parentNode.innerHTML + childHTML;
         }
